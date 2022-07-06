@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+h1{
+    text-align: center;
+    color:black;
+    font-size: 60px
+}
+h2{
+    font-size: 30px
+}
+header{
+    border: solid 10px;
+    height:140px;
+    background-color: blueviolet;
+}
+#logo{
+    float:left;
+    width: auto;
+    height: 120px;
+    border-radius: 15%;
+ 
+   
+}
+ section img {
+    max-width: 600px;
+    max-height:600px;
+    padding: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+   
+   
+   
+
+   
+ }
+ section img:hover {
+ border: 5px solid rosybrown;
+cursor: pointer;
+      }
+
+
+main{
+    background-color: yellow;
+    size:960px;
+}
+footer{
+ background-color: aquamarine;
+    height:100px
+
+}
