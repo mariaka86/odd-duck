@@ -13,7 +13,7 @@ let image1; //  1st image element
 let image2; // 2nd image element
 let image3;// 3rd image product
 let allProductsArray;// an array of product objects
-let clicks = 0; // # of user clicks
+let click = 0; // # of user clicks
 let maxClicksPermitted = 25; // the maximum amount that a user can  click.
 
 
@@ -33,8 +33,8 @@ let maxClicksPermitted = 25; // the maximum amount that a user can  click.
 function Product(productName,imagePath){
   this.productName = productName;
   this.imagePath= imagePath;
-  this.timesShown=0;
-  this.numberClicks=0;
+  this.views=0;
+  this.clicks=0;
 }
 /************************************************************************
   * LOGIC
@@ -66,9 +66,9 @@ function render(){
   image3.src = allProductsArray[product3].imagePath;
   image3.alt= allProductsArray[product3].productName;
   //incrementing views/ amount shown
-  allProductsArray[product1].timesShown++;
-  allProductsArray[product2].timesShown++;
-  allProductsArray[product3].timesShown++;
+  allProductsArray[product1].views++;
+  allProductsArray[product2].views++;
+  allProductsArray[product3].views++;
 }
 
 /**
@@ -77,10 +77,10 @@ function render(){
 function renderResult(){
   console.log('in renderResult()');
   let ul = document.querySelector('ul');
-  for(let i = 0; i < allProductsArray[i]; i++){
+  for(let i = 0; i < allProductsArray.length; i++){
     let product =allProductsArray[i];
     let li = document.createElement('li');
-    li.textContent= `${product.name} had ${product.timesShown} and was clicked ${product.numberClicks} times.`;
+    li.textContent= `${product.productName} had ${product.views} views and was clicked ${product.clicks} times.`;
     ul.appendChild(li);
   }
 }
@@ -92,7 +92,7 @@ function initialize (){
   console.log('in initialize()');
   // initial references to html
   fantaseaContainer = document.querySelector('section');
-  resultButton = document.querySelector('section + div');
+  resultButton = document.getElementById('resultButton');
   image1=document.querySelector('section img:first-child');
   image2=document.querySelector('section img:nth-child(2)');
   image3=document.querySelector('section img:nth-child(3)');
@@ -134,18 +134,18 @@ function handleProductClick(evt){
   if (evt.target === fantaseaContainer){
     alert('Please click on an image.');
   }
-  clicks++;
+  click++;
   // loop through random products
   // see if any match event target
   let clickProduct= evt.target.alt;
   for(let i=0; i< allProductsArray.length; i++){
-    if (clickProduct=== allProductsArray[i].name){
+    if (clickProduct=== allProductsArray[i].Productname){
       allProductsArray[i].clicks++;
       break;
     }
   }
   //checking to see if maximimum clicks have been reached(25)
-  if (clicks===maxClicksPermitted){
+  if (click===maxClicksPermitted){
     //removing event listener
     fantaseaContainer.removeEventListener ('click',handleProductClick);
     //enable the display of the result button
