@@ -13,7 +13,7 @@ let image1; //  1st image element
 let image2; // 2nd image element
 let image3;// 3rd image product
 let allProductsArray;// an array of product objects
-let clicks = 0; // # of user clicks
+let click = 0; // # of user clicks
 let maxClicksPermitted = 25; // the maximum amount that a user can  click.
 
 
@@ -24,17 +24,45 @@ let maxClicksPermitted = 25; // the maximum amount that a user can  click.
 
 
 
+
  Constructor for product objects **/
 /**
   *
   * @param {string} productName - the name of the product name
   * @param {string} imagePath - where the image is located
   */
+
+// making sure all random products don't repeat
+const productArray = [ 'bag.jpg',
+  'banana.jpg',
+  'bathroom.jpg',
+  'boots.jpg',
+  'breakfast.jpg',
+  'bubblegum.jpg',
+  'chair.jpg',
+  'cthulhu.jpg',
+  'dog-duck.jpg',
+  'dragon.jpg',
+  'pen.jpg',
+  'pet-sweep.jpg',
+  'scissors.jpg',
+  'shark.jpg',
+  'sweep.png',
+  'tauntaun.jpg',
+  'unicorn.jpg',
+  'water-can.jpg',
+  'wine-glass.jpg',];
+const str = 'banana.jpg';
+if (productArray.indexOf(str) === -1) {
+  productArray.push(str);
+}
+console.log(productArray);
+
 function Product(productName,imagePath){
   this.productName = productName;
   this.imagePath= imagePath;
-  this.timesShown=0;
-  this.numberClicks=0;
+  this.views=0;
+  this.clicks=0;
 }
 /************************************************************************
   * LOGIC
@@ -66,9 +94,9 @@ function render(){
   image3.src = allProductsArray[product3].imagePath;
   image3.alt= allProductsArray[product3].productName;
   //incrementing views/ amount shown
-  allProductsArray[product1].timesShown++;
-  allProductsArray[product2].timesShown++;
-  allProductsArray[product3].timesShown++;
+  allProductsArray[product1].views++;
+  allProductsArray[product2].views++;
+  allProductsArray[product3].views++;
 }
 
 /**
@@ -77,13 +105,71 @@ function render(){
 function renderResult(){
   console.log('in renderResult()');
   let ul = document.querySelector('ul');
-  for(let i = 0; i < allProductsArray[i]; i++){
+  for(let i = 0; i < allProductsArray.length; i++){
     let product =allProductsArray[i];
     let li = document.createElement('li');
-    li.textContent= `${product.name} had ${product.timesShown} and was clicked ${product.numberClicks} times.`;
+    li.textContent= `${product.productName} had ${product.views} views and was clicked ${product.clicks} times.`;
     ul.appendChild(li);
   }
 }
+/**
+ * Drawing a chart with product data
+ *
+ * *****************************************************************
+  Seperate arrays that'll be used in chart (chart data)*/
+function renderChart(){
+  console.log('in renderChart()');
+  let productsNames=[];
+  let productClicks=[];
+  let productViews=[];
+  for (let i =0; i < allProductsArray. length; i++){
+    productsNames.push(allProductsArray[i].productName);
+    productClicks.push(allProductsArray[i].clicks);
+    productViews.push(allProductsArray[i].views);
+  }
+  /*** Definining the data so it fits JSON chart format
+   *
+   */
+  const Productdata={
+    labels:productsNames,
+    datasets:[
+      {
+        label:'Clicks',
+        data:productClicks,
+        backgroundColor:['rgba(255,99,132,0.5)'],
+        borderColor:['rgb(255,99,132)'],
+        borderWidth:1,
+      },
+      {
+        label:'Views',
+        data: productViews,
+        backgroundColor:['rgba(255,99,132,0.5)'],
+        borderColor:['rgb(255,99,132)'],
+        borderWidth:1,
+
+
+      },
+    ],
+  };
+  // configuring graph
+  const config ={
+    type:'bar',
+    data:Productdata,
+    options:{
+      scales:{
+        y:{
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+  // reference the canvas element in html
+  let canvasChart = document.getElementById('myChart');
+  // draw chart
+  const myChart = new Chart(canvasChart,config);
+}
+
+
 /********************************************************************************
  * Control Logic
  */
@@ -92,7 +178,7 @@ function initialize (){
   console.log('in initialize()');
   // initial references to html
   fantaseaContainer = document.querySelector('section');
-  resultButton = document.querySelector('section + div');
+  resultButton = document.getElementById('resultButton');
   image1=document.querySelector('section img:first-child');
   image2=document.querySelector('section img:nth-child(2)');
   image3=document.querySelector('section img:nth-child(3)');
@@ -134,24 +220,26 @@ function handleProductClick(evt){
   if (evt.target === fantaseaContainer){
     alert('Please click on an image.');
   }
-  clicks++;
+
+  click++;
   // loop through random products
   // see if any match event target
   let clickProduct= evt.target.alt;
   for(let i=0; i< allProductsArray.length; i++){
-    if (clickProduct=== allProductsArray[i].name){
+    if (clickProduct=== allProductsArray[i].productName){
       allProductsArray[i].clicks++;
       break;
     }
   }
   //checking to see if maximimum clicks have been reached(25)
-  if (clicks===maxClicksPermitted){
+  if (click===maxClicksPermitted){
     //removing event listener
     fantaseaContainer.removeEventListener ('click',handleProductClick);
     //enable the display of the result button
     resultButton.addEventListener('click',renderResult);
     resultButton.className= 'clicks-allowed';
     fantaseaContainer.className = 'no-voting';
+    renderChart();
   }else{
     render();
   }
