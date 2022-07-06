@@ -24,12 +24,40 @@ let maxClicksPermitted = 25; // the maximum amount that a user can  click.
 
 
 
+
  Constructor for product objects **/
 /**
   *
   * @param {string} productName - the name of the product name
   * @param {string} imagePath - where the image is located
   */
+
+// making sure all random products don't repeat
+const productArray = [ 'bag.jpg',
+  'banana.jpg',
+  'bathroom.jpg',
+  'boots.jpg',
+  'breakfast.jpg',
+  'bubblegum.jpg',
+  'chair.jpg',
+  'cthulhu.jpg',
+  'dog-duck.jpg',
+  'dragon.jpg',
+  'pen.jpg',
+  'pet-sweep.jpg',
+  'scissors.jpg',
+  'shark.jpg',
+  'sweep.png',
+  'tauntaun.jpg',
+  'unicorn.jpg',
+  'water-can.jpg',
+  'wine-glass.jpg',];
+const str = 'banana.jpg';
+if (productArray.indexOf(str) === -1) {
+  productArray.push(str);
+}
+console.log(productArray);
+
 function Product(productName,imagePath){
   this.productName = productName;
   this.imagePath= imagePath;
@@ -108,14 +136,14 @@ function renderChart(){
       {
         label:'Clicks',
         data:productClicks,
-        backgroundColor:['rgba(255,99,132,0.2)'],
+        backgroundColor:['rgba(255,99,132,0.5)'],
         borderColor:['rgb(255,99,132)'],
         borderWidth:1,
       },
       {
         label:'Views',
         data: productViews,
-        backgroundColor:['rgba(255,99,132,0.2)'],
+        backgroundColor:['rgba(255,99,132,0.5)'],
         borderColor:['rgb(255,99,132)'],
         borderWidth:1,
 
@@ -192,6 +220,7 @@ function handleProductClick(evt){
   if (evt.target === fantaseaContainer){
     alert('Please click on an image.');
   }
+
   click++;
   // loop through random products
   // see if any match event target
