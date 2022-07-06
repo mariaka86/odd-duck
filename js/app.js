@@ -41,7 +41,7 @@ function Product(productName,imagePath){
   ***********************************************************************
   /
 /**
- * Draw 3 random product on the page
+ * Draw 3 random products on the page
  */
 function render(){
   console.log('rendering()');
@@ -96,7 +96,7 @@ function initialize (){
   image1=document.querySelector('section img:first-child');
   image2=document.querySelector('section img:nth-child(2)');
   image3=document.querySelector('section img:nth-child(3)');
-  // instanitiating prodcuts
+  // instanitiating products
   allProductsArray =[];
   allProductsArray.push(new Product('Bag','./images/bag.jpg'));
   allProductsArray.push(new Product('Banana','./images/banana.jpg'));

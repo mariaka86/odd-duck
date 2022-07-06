@@ -17,34 +17,35 @@ header{
 #logo{
     float:left;
     width: auto;
-    height: 120px;
+    height: 50px;
     border-radius: 15%;
  
    
 }
  section img {
-    max-width: 600px;
-    max-height:600px;
-    padding: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
-   
-   
-   
-
-   
+    
+        float: left;
+        width: 33.33%;
+        padding: 15px;
+        height: 300px;
+       
  }
+
  section img:hover {
- border: 5px solid rosybrown;
+ border: 5px solid rgb(158, 73, 73);
 cursor: pointer;
       }
 
 
 main{
     background-color: yellow;
-    size:960px;
+    size: 800px;
 }
 footer{
- background-color: aquamarine;
-    height:100px
+ background-color: rgb(63, 189, 147);
+    height:50px
 
+}
+p{
+    text-align:left;
 }
