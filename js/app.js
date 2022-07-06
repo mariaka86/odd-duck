@@ -84,6 +84,64 @@ function renderResult(){
     ul.appendChild(li);
   }
 }
+/**
+ * Drawing a chart with product data
+ *
+ * *****************************************************************
+  Seperate arrays that'll be used in chart (chart data)*/
+function renderChart(){
+  console.log('in renderChart()');
+  let productsNames=[];
+  let productClicks=[];
+  let productViews=[];
+  for (let i =0; i < allProductsArray. length; i++){
+    productsNames.push(allProductsArray[i].productName);
+    productClicks.push(allProductsArray[i].clicks);
+    productViews.push(allProductsArray[i].views);
+  }
+  /*** Definining the data so it fits JSON chart format
+   *
+   */
+  const Productdata={
+    labels:productsNames,
+    datasets:[
+      {
+        label:'Clicks',
+        data:productClicks,
+        backgroundColor:['rgba(255,99,132,0.2)'],
+        borderColor:['rgb(255,99,132)'],
+        borderWidth:1,
+      },
+      {
+        label:'Views',
+        data: productViews,
+        backgroundColor:['rgba(255,99,132,0.2)'],
+        borderColor:['rgb(255,99,132)'],
+        borderWidth:1,
+
+
+      },
+    ],
+  };
+  // configuring graph
+  const config ={
+    type:'bar',
+    data:Productdata,
+    options:{
+      scales:{
+        y:{
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+  // reference the canvas element in html
+  let canvasChart = document.getElementById('myChart');
+  // draw chart
+  const myChart = new Chart(canvasChart,config);
+}
+
+
 /********************************************************************************
  * Control Logic
  */
@@ -152,6 +210,7 @@ function handleProductClick(evt){
     resultButton.addEventListener('click',renderResult);
     resultButton.className= 'clicks-allowed';
     fantaseaContainer.className = 'no-voting';
+    renderChart();
   }else{
     render();
   }
