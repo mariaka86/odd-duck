@@ -197,7 +197,7 @@ function handleProductClick(evt){
   // see if any match event target
   let clickProduct= evt.target.alt;
   for(let i=0; i< allProductsArray.length; i++){
-    if (clickProduct=== allProductsArray[i].Productname){
+    if (clickProduct=== allProductsArray[i].productName){
       allProductsArray[i].clicks++;
       break;
     }
