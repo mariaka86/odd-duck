@@ -144,7 +144,7 @@ function renderChart(){
   keepStorage();
   /// putting selection into local storage
   function keepStorage(){
-    let arrayString  = JSON.stringify(allProductsArray);
+    let arrayString  = JSON.stringify({"data":allProductsArray});
     console.log('keepStorage',arrayString);
     localStorage.setItem('save',arrayString);
   }
@@ -158,7 +158,7 @@ function renderChart(){
     if (result === null){
       return[];
     } else{
-      let allProductsArray = JSON.parse(result);
+      let allProductsArray = JSON.parse(result).data;
       //structure
       return result.data;
     }
