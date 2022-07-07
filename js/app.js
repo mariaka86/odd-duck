@@ -148,14 +148,22 @@ function renderChart(){
     console.log('keepStorage',arrayString);
     localStorage.setItem('save',arrayString);
   }
-  function getStoredData(){
-  //gets data back from storage (keepStorage)
-    let data = localStorage.getItem('save');
-    console.log('getStorageData', data);
-    let productData= JSON.parse(data);
+  getStoredData();
 
-    allProductsArray= productData;
-  }
+  function getStoredData(){
+    let key ='save';
+    //gets data back from storage (keepStorage)
+    let result = localStorage.getItem('save');
+    console.log('getStorageData', result);
+    if (result === null){
+      return[];
+    } else{
+      let arrayString = JSON.parse(result);
+      //structure
+      return result.data;
+    }
+  };
+
   /*** Definining the data so it fits JSON chart format
    *
    */
