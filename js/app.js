@@ -158,11 +158,11 @@ function renderChart(){
     if (result === null){
       return[];
     } else{
-      let arrayString = JSON.parse(result);
+      let allProductsArray = JSON.parse(result);
       //structure
       return result.data;
     }
-  };
+  }
 
   /*** Definining the data so it fits JSON chart format
    *
