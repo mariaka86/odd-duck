@@ -73,6 +73,17 @@ function Product(productName,imagePath){
  */
 function render(){
   console.log('rendering()');
+  // finding previous values
+  let currentSet=[];
+  let previousSet=[];
+  for (let i = 0; i < 3; i++) {
+    let index = getRandomProductIndex();
+    while(previousSet.includes(index) ||(currentSet.includes(index))){
+      index=getRandomProductIndex();
+    }
+    currentSet.push(index);
+  }
+  previousSet= currentSet;
   ///getting 3 random products
   let product1 = getRandomProductIndex();
   let product2 = getRandomProductIndex();
@@ -87,16 +98,19 @@ function render(){
 
   }
   // Image value
-  image1.src = allProductsArray[product1].imagePath;
-  image1.alt= allProductsArray[product1].productName;
-  image2.src = allProductsArray[product2].imagePath;
-  image2.alt= allProductsArray[product2].productName;
-  image3.src = allProductsArray[product3].imagePath;
-  image3.alt= allProductsArray[product3].productName;
+  image1.src = allProductsArray[currentSet[0]].imagePath;
+  image1.alt= allProductsArray[currentSet[0]].productName;
+  image2.src = allProductsArray[currentSet[1]].imagePath;
+  image2.alt= allProductsArray[currentSet[1]].productName;
+  image3.src = allProductsArray[currentSet[2]].imagePath;
+  image3.alt= allProductsArray[currentSet[2]].productName;
+  // finding previous values
+
+
   //incrementing views/ amount shown
-  allProductsArray[product1].views++;
-  allProductsArray[product2].views++;
-  allProductsArray[product3].views++;
+  allProductsArray[currentSet[0]].views++;
+  allProductsArray[currentSet[1]].views++;
+  allProductsArray[currentSet[2]].views++;
 }
 
 /**
