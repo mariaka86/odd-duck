@@ -141,6 +141,29 @@ function renderChart(){
     productClicks.push(allProductsArray[i].clicks);
     productViews.push(allProductsArray[i].views);
   }
+  keepStorage();
+  /// putting selection into local storage
+  function keepStorage(){
+    let arrayString  = JSON.stringify(allProductsArray);
+    console.log('keepStorage',arrayString);
+    localStorage.setItem('save',arrayString);
+  }
+  getStoredData();
+
+  function getStoredData(){
+    let key ='save';
+    //gets data back from storage (keepStorage)
+    let result = localStorage.getItem('save');
+    console.log('getStorageData', result);
+    if (result === null){
+      return[];
+    } else{
+      let arrayString = JSON.parse(result);
+      //structure
+      return result.data;
+    }
+  };
+
   /*** Definining the data so it fits JSON chart format
    *
    */
