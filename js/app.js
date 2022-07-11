@@ -162,6 +162,7 @@ function renderChart(){
       //structure
       return result.data;
     }
+
   }
 
   /*** Definining the data so it fits JSON chart format

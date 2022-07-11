@@ -1,1 +1,2 @@
 # odd-duck
+a project that includes being able to select and vote on odd products. This project includes a library in order to create a data chart.It also uses local storage to prevent user from having to revote and reenter information. Utilizes Javascript to insure user does not see the same product twice. 
